@@ -1,19 +1,19 @@
 
 /**
- * Write a description of class Class here.
+ * Write a description of class CPU here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Class
+public class CPU extends Board
 {
     // instance variables - replace the example below with your own
     private int x;
 
     /**
-     * Constructor for objects of class Class
+     * Constructor for objects of class CPU
      */
-    public Class()
+    public CPU()
     {
         // initialise instance variables
         x = 0;

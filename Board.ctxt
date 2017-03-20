@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Board()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Board\r\n
+comment1.params=
+comment1.target=void\ makeBoard()
+comment2.params=
+comment2.target=void\ printBoard()
+comment3.params=r\ c\ s
+comment3.target=void\ checkColumn(int,\ int,\ java.lang.String)
+numComments=4
