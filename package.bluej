@@ -47,6 +47,7 @@ target3.editor.x=70
 target3.editor.y=50
 target3.height=50
 target3.name=CPU
+target3.naviview.expanded=true
 target3.showInterface=false
 target3.type=ClassTarget
 target3.typeParameters=

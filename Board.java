@@ -41,18 +41,37 @@ public class Board
         }
     }
     
-    public void checkColumn(int r, int c, String s) {        
-        
-        if (board[r][c].equals("_")) {
+    public void checkColumn(int r, int c, String s) {               
+        if (board[r][c].equals("_")) { 
+            //checks if space is empty
             board[r][c] = s;
         }
         
         else {
             checkColumn(r-1, c, s);
         }    
-        
-       
-       
-       
+
+    }
+        public boolean CheckXHorizontal(String s){
+        //creates boolean to act as flag
+        boolean win = false;
+        //creates counter
+        int counter = 0;
+        //goes through board horizontally
+        for(int w = 0; w < 7; w++){
+            for(int h = 0; h < 7; h++){
+                if(board[w][h].equals(s)){ //if it finds an X, add 1 to counter
+                    counter++;
+                }
+                else{
+                    counter = 0; // if next piece is not an X, set counter to 0
+                }
+                if(counter == 4){
+                    System.out.println("You win"); //if counter is greater or equal to 4, player wins
+                    win = true;
+                }
+            }
+        }
+        return win;
     }
 }

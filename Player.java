@@ -21,8 +21,9 @@ public class Player extends Board
     public int move() {
         System.out.println("Select a column (1-7)");
         column = scan.nextInt();
-        return column;
-        
+        return column;        
     }
+    
+    
 
 }
