@@ -15,28 +15,44 @@ public class GameDriver
     public static void main(String[]args)
     {
         Board board = new Board();
-        Player p1 = new Player("X");
-        Player p2 = new Player("O");
+        Player p1 = new Player("X", "Player 1");
+        Player p2 = new Player("O", "Player 2");
         board.makeBoard();
         
         //Game Loop
         
-        boolean won = false;
+        boolean on = true;
         
-        while (won == false) {
+        while (on) {
             int col = p1.move();
+            //check if column is full
+            while (board.checkFull(col - 1)) {
+                System.out.println("That column is full. Choose again. (1-7)");
+                col = p1.move();
+            }
+            //check which row to put the piece
             board.checkColumn(6, col - 1, p1.symbol);
-            won = board.CheckXHorizontal(p1.symbol);
-            board.printBoard();
-            if (won = true) {
+            //check if player 1 has won horizontally
+            if (board.CheckXHorizontal() || board.CheckXVertical()) {
+                board.printBoard();
                 break;
             }
+            else {
+                board.printBoard();
+            }
+            
             int col2 = p2.move();
+            while (board.checkFull(col2 - 1)) {
+                System.out.println("That column is full. Choose again. (1-7)");
+                col2 = p2.move();
+            }
             board.checkColumn(6, col2 - 1, p2.symbol);
-            won = board.CheckXHorizontal(p2.symbol);
-            board.printBoard();
-            if (won = true) {
+            if (board.CheckOHorizontal() || board.CheckOVertical() || board.CheckODiagonalLRLH()) {
+                board.printBoard();
                 break;
+            }
+            else {
+                board.printBoard();
             }
         }
     }

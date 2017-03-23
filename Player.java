@@ -6,21 +6,29 @@
  * @version (a version number or a date)
  */
 import java.util.Scanner;
-public class Player extends Board
+public class Player
 {
     // instance variables - replace the example below with your own
     private int column;
-    private int moveCount = 0;
     Scanner scan = new Scanner(System.in);
     public String symbol;
+    public String name;
     
-    public Player(String sym) {
+    public Player(String sym, String nombre) {
         this.symbol = sym;
+        this.name = nombre;
     }
     
     public int move() {
-        System.out.println("Select a column (1-7)");
+        System.out.println(name + ": " + "Select a column (1-7)");
         column = scan.nextInt();
+        
+        //makes sure entry is within bounds of columns
+        while (column > 7 || column < 1) {
+            System.out.println("That column is out of bounds. Choose again. (1-7)");
+            column = scan.nextInt();
+        }
+        
         return column;        
     }
     
