@@ -143,6 +143,34 @@ public class Board
         }
         return win;
     }
+    
+    //Checks if player 1 has won with a diagonal from left right, low high
+    public boolean CheckXDiagonalLRLH(){
+        //creates boolean to act as flag
+        boolean win = false;
+        boolean getOut = false;
+        
+        //goes through board horizontally
+        for(int c = 0; c < 4; c++){
+            for(int r = 6; r > 2; r--){
+                if (board[r][c].equals("X") && board[r-1][c+1].equals("X") && board[r-2][c+2].equals("X")
+                && board[r-3][c+3].equals("X")) { //if it finds the symbol, add 1 to counter
+                    System.out.println("Player 1 wins!");
+                    getOut = true;
+                    win = true;
+                }
+                else {
+                    win = false; //if next piece is not an X, set counter to 0
+                }
+
+            }
+        }
+        
+        if (getOut) {
+            win = true;
+        }
+        return win;
+    }
 
     //checks if player 2 has won horizontally
     public boolean CheckOHorizontal(){
@@ -172,12 +200,14 @@ public class Board
     public boolean CheckODiagonalLRLH(){
         //creates boolean to act as flag
         boolean win = false;
+        boolean getOut = false;
         //goes through board horizontally
         for(int c = 0; c < 4; c++){
             for(int r = 6; r > 2; r--){
                 if (board[r][c].equals("O") && board[r-1][c+1].equals("O") && board[r-2][c+2].equals("O")
                 && board[r-3][c+3].equals("O")) { //if it finds the symbol, add 1 to counter
                     System.out.println("Player 2 wins!");
+                    win = true;
                 }
                 else {
                     win = false; //if next piece is not an X, set counter to 0
@@ -185,7 +215,13 @@ public class Board
 
             }
         }
+        
+        if (getOut) {
+            win = true;
+        }
         return win;
     }
+    
+    
 }
 

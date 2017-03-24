@@ -33,7 +33,7 @@ public class GameDriver
             //check which row to put the piece
             board.checkColumn(6, col - 1, p1.symbol);
             //check if player 1 has won horizontally
-            if (board.CheckXHorizontal() || board.CheckXVertical()) {
+            if (board.CheckXHorizontal() || board.CheckXVertical() || board.CheckXDiagonalLRLH()) {
                 board.printBoard();
                 break;
             }
