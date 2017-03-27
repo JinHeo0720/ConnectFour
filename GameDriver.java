@@ -32,8 +32,13 @@ public class GameDriver
             }
             //check which row to put the piece
             board.checkColumn(6, col - 1, p1.symbol);
+            //checks for a cat's game
+            if (board.catsGame()) {
+                System.out.println("Cat's Game!");
+                break;
+            }
             //check if player 1 has won horizontally
-            if (board.CheckXHorizontal() || board.CheckXVertical() || board.CheckXDiagonalLRLH()) {
+            if (board.checkXHorizontal() || board.checkXVertical() || board.checkXDiagonals()) {
                 board.printBoard();
                 break;
             }
@@ -47,7 +52,11 @@ public class GameDriver
                 col2 = p2.move();
             }
             board.checkColumn(6, col2 - 1, p2.symbol);
-            if (board.CheckOHorizontal() || board.CheckOVertical() || board.CheckODiagonalLRLH()) {
+            if (board.catsGame()) {
+                System.out.println("Cat's Game!");
+                break;
+            }
+            if (board.checkOHorizontal() || board.checkOVertical() || board.checkODiagonals()) {
                 board.printBoard();
                 break;
             }

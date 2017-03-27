@@ -24,8 +24,10 @@ public class Board
                 board[row][col] = "_";
             }
         }
-        for (int row = 0; row < 7; row++) {
-            for (int col = 0; col < 7; col++) {
+        
+        //prints blank board after setup
+        for (int row = 0; row < 7; row++) {            
+            for (int col = 0; col < 7; col++) {                
                 System.out.print("|" + board[row][col] + "|");
             }
             System.out.println();
@@ -33,8 +35,9 @@ public class Board
     }
     
     public void printBoard() {
+        //prints board during play
         for (int row = 0; row < 7; row++) {
-            for (int col = 0; col < 7; col++) {
+            for (int col = 0; col < 7; col++) {               
                 System.out.print("|" + board[row][col] + "|");
             }
             System.out.println();
@@ -68,12 +71,31 @@ public class Board
         }
     }
     
+    //Checks for cat's game
+    public boolean catsGame() {
+        int counter = 0;
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 6; c++) {
+                if (board[r][c].equals("X") || board[r][c].equals("O")) {
+                    counter++;
+                }
+            }
+        }
+        
+        if (counter == 49) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
     
     
     //CHECKING FOR WIN
     
     //Checks if a player 1 has won horizontally
-    public boolean CheckXHorizontal(){
+    public boolean checkXHorizontal(){
         //creates boolean to act as flag
         boolean win = false;
         //creates counter
@@ -97,7 +119,7 @@ public class Board
     }
     
     //Checks if player 1 has won vertically
-    public boolean CheckXVertical(){
+    public boolean checkXVertical(){
         //creates boolean to act as flag
         boolean win = false;
         //creates counter
@@ -121,7 +143,7 @@ public class Board
     }
     
     //Checks if player 2 has won vertically
-    public boolean CheckOVertical(){
+    public boolean checkOVertical(){
         //creates boolean to act as flag
         boolean win = false;
         //creates counter
@@ -145,7 +167,7 @@ public class Board
     }
     
     //Checks if player 1 has won with a diagonal from left right, low high
-    public boolean CheckXDiagonalLRLH(){
+    public boolean checkXDiagonalLR(){
         //creates boolean to act as flag
         boolean win = false;
         boolean getOut = false;
@@ -171,9 +193,45 @@ public class Board
         }
         return win;
     }
+    
+    //Checks if player 1 has won with a diagonal from right to left, low high
+    public boolean checkXDiagonalRL(){
+        //creates boolean to act as flag
+        boolean win = false;
+        boolean getOut = false;
+        
+        //goes through board horizontally
+        for(int c = 6; c > 2; c--){
+            for(int r = 6; r > 2; r--){
+                if (board[r][c].equals("X") && board[r-1][c-1].equals("X") && board[r-2][c-2].equals("X")
+                && board[r-3][c-3].equals("X")) { //if it finds the symbol, add 1 to counter
+                    System.out.println("Player 1 wins!");
+                    getOut = true;
+                }
+                else {
+                    win = false; //if next piece is not an X, set counter to 0
+                }
+
+            }
+        }
+        
+        if (getOut) {
+            win = true;
+        }
+        return win;
+    }
+    
+    //checks player 1's diagonals collectively
+    public boolean checkXDiagonals() {
+        if (checkXDiagonalRL() || checkXDiagonalLR()) {
+            return true;
+        }
+        else
+            return false;
+    }
 
     //checks if player 2 has won horizontally
-    public boolean CheckOHorizontal(){
+    public boolean checkOHorizontal(){
         //creates boolean to act as flag
         boolean win = false;
         //creates counter
@@ -197,7 +255,7 @@ public class Board
     }
     
     //Checks if player 2 has won with a diagonal from left right, low high
-    public boolean CheckODiagonalLRLH(){
+    public boolean checkODiagonalLR(){
         //creates boolean to act as flag
         boolean win = false;
         boolean getOut = false;
@@ -207,6 +265,34 @@ public class Board
                 if (board[r][c].equals("O") && board[r-1][c+1].equals("O") && board[r-2][c+2].equals("O")
                 && board[r-3][c+3].equals("O")) { //if it finds the symbol, add 1 to counter
                     System.out.println("Player 2 wins!");
+                    getOut = true;
+                    win = true;
+                }
+                else {
+                    win = false; //if next piece is not an X, set counter to 0
+                }
+
+            }
+        }
+        
+        if (getOut) {
+            win = true;
+        }
+        return win;
+    }
+    
+    //Checks if player 2 has won with a diagonal from right to left, low high
+    public boolean checkODiagonalRL(){
+        //creates boolean to act as flag
+        boolean win = false;
+        boolean getOut = false;
+        //goes through board horizontally
+        for(int c = 6; c > 2; c--){
+            for(int r = 6; r > 2; r--){
+                if (board[r][c].equals("O") && board[r-1][c-1].equals("O") && board[r-2][c-2].equals("O")
+                && board[r-3][c-3].equals("O")) { //if it finds the symbol, add 1 to counter
+                    System.out.println("Player 2 wins!");
+                    getOut = true;
                     win = true;
                 }
                 else {
@@ -223,5 +309,13 @@ public class Board
     }
     
     
+    //checks player 2's diagonals collectively
+    public boolean checkODiagonals() {
+        if (checkODiagonalRL() || checkODiagonalLR()) {
+            return true;
+        }
+        else
+            return false;
+    }
 }
 
