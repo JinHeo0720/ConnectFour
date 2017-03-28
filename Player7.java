@@ -6,7 +6,7 @@
  * @version (a version number or a date)
  */
 import java.util.Scanner;
-public class Player
+public class Player7
 {
     // instance variables - replace the example below with your own
     private int column;
@@ -14,7 +14,7 @@ public class Player
     public String symbol;
     public String name;
     
-    public Player(String sym, String nombre) {
+    public Player7(String sym, String nombre) {
         this.symbol = sym;
         this.name = nombre;
     }

@@ -1,11 +1,8 @@
 
 /**
- * Write a description of class Board here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ *7x7 board
  */
-public class Board
+public class Board7
 {
     // instance variables - replace the example below with your own
     String[][] board = new String[7][7];
@@ -13,11 +10,12 @@ public class Board
     /**
      * Constructor for objects of class Board
      */
-    public Board()
+    public Board7()
     {
         
     }
-
+    
+    //creates the board
     public void makeBoard() {
         for (int row = 0; row < 7; row++) {
             for (int col = 0; col < 7; col++) {
@@ -34,6 +32,7 @@ public class Board
         }
     }
     
+    //prints the board
     public void printBoard() {
         //prints board during play
         for (int row = 0; row < 7; row++) {
@@ -74,15 +73,13 @@ public class Board
     //Checks for cat's game
     public boolean catsGame() {
         int counter = 0;
-        for (int r = 0; r < 6; r++) {
-            for (int c = 0; c < 6; c++) {
-                if (board[r][c].equals("X") || board[r][c].equals("O")) {
-                    counter++;
-                }
+        for (int c = 0; c < 7; c++) {
+            if (checkFull(c)) {
+                counter++;
             }
         }
         
-        if (counter == 49) {
+        if (counter == 7) {
             return true;
         }
         else {
@@ -109,8 +106,8 @@ public class Board
                 else {
                     counter = 0; //if next piece is not an X, set counter to 0
                 }
-                if (counter == 4) {
-                    System.out.println("Player 1 wins!"); //if counter is greater or equal to 4, player wins
+                if (counter >= 4) {
+                    System.out.println("Player 1 wins!"); //if counter is greater or equal to 4, player 1 wins
                     win = true;
                 }
             }
@@ -133,7 +130,7 @@ public class Board
                 else {
                     counter = 0; //if next piece is not an X, set counter to 0
                 }
-                if (counter == 4) {
+                if (counter >= 4) {
                     System.out.println("Player 1 wins!"); //if counter is greater or equal to 4, player wins
                     win = true;
                 }
@@ -155,9 +152,9 @@ public class Board
                     counter++;
                 }
                 else {
-                    counter = 0; //if next piece is not an X, set counter to 0
+                    counter = 0; //if next piece is not an O, set counter to 0
                 }
-                if (counter == 4) {
+                if (counter >= 4) {
                     System.out.println("Player 2 wins!"); //if counter is greater or equal to 4, player wins
                     win = true;
                 }
@@ -170,24 +167,25 @@ public class Board
     public boolean checkXDiagonalLR(){
         //creates boolean to act as flag
         boolean win = false;
+        //creates boolean to get out of for loop
         boolean getOut = false;
         
-        //goes through board horizontally
+        //goes through first 3 columns and last 4 rows
         for(int c = 0; c < 4; c++){
             for(int r = 6; r > 2; r--){
                 if (board[r][c].equals("X") && board[r-1][c+1].equals("X") && board[r-2][c+2].equals("X")
-                && board[r-3][c+3].equals("X")) { //if it finds the symbol, add 1 to counter
+                && board[r-3][c+3].equals("X")) { //if it finds X in a diagonal pattern, get out boolean is triggered
                     System.out.println("Player 1 wins!");
                     getOut = true;
-                    win = true;
                 }
                 else {
-                    win = false; //if next piece is not an X, set counter to 0
+                    win = false; //if the pattern is not completed, win is false
                 }
 
             }
         }
         
+        //if win is set to true within the for loop, it may be overwritten when the loop checks the other sections of the board so getOut remains true if just one diagonal is found
         if (getOut) {
             win = true;
         }
@@ -198,23 +196,25 @@ public class Board
     public boolean checkXDiagonalRL(){
         //creates boolean to act as flag
         boolean win = false;
+        //creates boolean to get out of for loop
         boolean getOut = false;
         
-        //goes through board horizontally
+        //goes through last 3 columns and last 4 rows
         for(int c = 6; c > 2; c--){
             for(int r = 6; r > 2; r--){
                 if (board[r][c].equals("X") && board[r-1][c-1].equals("X") && board[r-2][c-2].equals("X")
-                && board[r-3][c-3].equals("X")) { //if it finds the symbol, add 1 to counter
+                && board[r-3][c-3].equals("X")) { //if it finds X in a diagonal pattern, get out boolean is triggered
                     System.out.println("Player 1 wins!");
                     getOut = true;
                 }
                 else {
-                    win = false; //if next piece is not an X, set counter to 0
+                    win = false; //if the pattern is not completed, win is false
                 }
 
             }
         }
         
+        //if win is set to true within the for loop, it may be overwritten when the loop checks the other sections of the board so getOut remains true if just one diagonal is found
         if (getOut) {
             win = true;
         }
@@ -258,8 +258,9 @@ public class Board
     public boolean checkODiagonalLR(){
         //creates boolean to act as flag
         boolean win = false;
+        //creates boolean to get out of for loop
         boolean getOut = false;
-        //goes through board horizontally
+        //checks first 3 columns, last 4 rows
         for(int c = 0; c < 4; c++){
             for(int r = 6; r > 2; r--){
                 if (board[r][c].equals("O") && board[r-1][c+1].equals("O") && board[r-2][c+2].equals("O")
@@ -269,7 +270,7 @@ public class Board
                     win = true;
                 }
                 else {
-                    win = false; //if next piece is not an X, set counter to 0
+                    win = false; //if next piece is not an O, set counter to 0
                 }
 
             }
@@ -285,23 +286,25 @@ public class Board
     public boolean checkODiagonalRL(){
         //creates boolean to act as flag
         boolean win = false;
+        //creates boolean to get out of for loop
         boolean getOut = false;
-        //goes through board horizontally
+        
+        //goes through last 3 columns and last 4 rows
         for(int c = 6; c > 2; c--){
             for(int r = 6; r > 2; r--){
                 if (board[r][c].equals("O") && board[r-1][c-1].equals("O") && board[r-2][c-2].equals("O")
-                && board[r-3][c-3].equals("O")) { //if it finds the symbol, add 1 to counter
+                && board[r-3][c-3].equals("O")) { //if it finds O in a diagonal pattern, get out boolean is triggered
                     System.out.println("Player 2 wins!");
                     getOut = true;
-                    win = true;
                 }
                 else {
-                    win = false; //if next piece is not an X, set counter to 0
+                    win = false; //if the pattern is not completed, win is false
                 }
 
             }
         }
         
+        //if win is set to true within the for loop, it may be overwritten when the loop checks the other sections of the board so getOut remains true if just one diagonal is found
         if (getOut) {
             win = true;
         }
@@ -311,9 +314,8 @@ public class Board
     
     //checks player 2's diagonals collectively
     public boolean checkODiagonals() {
-        if (checkODiagonalRL() || checkODiagonalLR()) {
+        if (checkODiagonalRL() || checkODiagonalLR()) 
             return true;
-        }
         else
             return false;
     }

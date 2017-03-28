@@ -5,8 +5,9 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CPU extends Board
+public class CPU
 {
-    // instance variables - replace the example below with your own
-    //GOOD LUCK
+    public CPU() {
+        
+    }
 }
